@@ -1,4 +1,6 @@
 const IMAGE_URL = "https://placehold.co/200";
+const container = document.querySelector(".container");
+const listBands = document.querySelector(".bands");
 
 const users = [
     {
@@ -25,26 +27,43 @@ const users = [
     }
 ];
 
-//Selectores
-const card = document.getElementsByClassName("card");
-const cardImgContainer = document.getElementsByClassName("card-img-container");
+function createCard(user_name, description, age, id, bands) {
+    const card = document.createElement("div");
+    card.classList.add("card");
 
-//Crear elemento img
-const imageElement = document.createElement("img");
-imageElement.src = IMAGE_URL;
-imageElement.alt = "User profile photo";
+    card.innerHTML = `
+            <div class = "card-img-container">
+            <img src="${IMAGE_URL}" alt="${user_name}">
+            </div>
+            <div class="card">
+                <h3 class="card-title">${user_name}</h3>
+                <p>${age}</p>
+                <p>${description}</p>
+            </div>
+            <li>${bands}</li>
+    `;
+    
+    container.appendChild(card);
+    return card;
+    
+}
+//createCard();
 
-//Creamos elemento título, edad y descripción para card
-const cardTitleElement = document.createElement("h3");
-cardTitleElement.classList.add("card-title"); //Agrega una clase para dar estilo al elemento h3
-const cardAgeElement = document.createElement("p");
-const cardDescElement = document.createElement("p");
+function render () {
+    users.forEach(user => {
+        container.appendChild(createCard(
+            user.user_name,
+            user.age,
+            user.description,
+            user.id,
+        )
+    )
+    });
+    users.fav_music.bands.forEach(band => {
+        const li = document.createElement('li');
+        li.textContent = band;
+        listBands.appendChild();
+    })
+}
 
-//Populate/Poblar
-cardTitleElement.textContent = users.username;
-cardAgeElement.textContent = users.age;
-cardDescElement.textContent = users.description;
-
-//Renderizar
-cardImgContainer.appendChild(imageElement);
-card.append(cardTitleElement, cardAgeElement, cardDescElement);
+render();
