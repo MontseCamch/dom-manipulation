@@ -60,10 +60,11 @@ function render () {
     )
     });
     users.fav_music.bands.forEach(band => {
-        const li = document.createElement('li');
-        li.textContent = band;
-        listBands.appendChild();
-    })
+        container.appendChild(createCard(
+            band.bands,
+        )
+    )
+    });
 }
 
 render();
